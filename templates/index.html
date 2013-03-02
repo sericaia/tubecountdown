@@ -10,13 +10,13 @@
 
   <body>
   
-  <div id="before_header"> 
-    <div class="main_header">
-		<img src="../images/logo.png" height="25px">
-		<span class="toptext">24 hour world domination</span></a>
-	</div>
-</div>
-	
+	  <div id="before_header"> 
+		<div class="main_header">
+			<img src="../images/logo.png" height="25px">
+			<span class="toptext">24 hour world domination</span></a>
+		</div>
+	  </div>
+		
   
 	<!--<h1>Tube Countdown</h1>
 	 colocar letras giras do workshop responsive design-->
@@ -24,25 +24,32 @@
  
  <div id="content">
 	
+	  <a href="newpost.html"><h2>new stage</h2></a>
+	
+	<table border="0">
+
 	{% for counter in query.run(limit=10) %}
 		
+
 		<div class ="counter">
 		<form method="post">
-			<div class="counter-title">{{counter.title}}</div>
-			
-			<div class="counter-user">{{counter.user}}</div>
-			<div class="counter-created">{{counter.created}}</div>
-			<div class="counter-rate">{{counter.rate}}</div>	
-			<div class="counter-description">{{counter.description}}</div>
+			<th><div class="counter-title">{{counter.title}}</div></th>			
+			<th><div class="counter-user">{{counter.user}}</div></th>	
+			<th><div class="counter-created">{{counter.created}}</div></th>	
+			<th><div class="counter-rate">{{counter.rate}}</div></th>	
+			<th><div class="counter-description">{{counter.description}}</div></th>	
 			<!-- Place this tag where you want the +1 button to render. -->
-		<div class="g-plusone" data-annotation="inline" data-width="300"></div>
-	
+			<th><div class="g-plusone" data-annotation="inline" data-width="300" data-href="{{counter.url}}"></div></th>	
+
 			<!-- botao GO_URL-->
-			<input type="hidden" name="user"  value="{{counter.key().id()}}">
-			<input type="submit"  value="Watch">
+			<th><input type="hidden" name="user"  value="{{counter.key().id()}}">
+			<input type="submit"  value="Watch"></th>	
 		</form>	
 		</div>
+		
+		</tr>
 	{% endfor %}
+	</table>
 	
 	</div>
 	
