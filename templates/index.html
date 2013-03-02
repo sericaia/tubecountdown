@@ -2,26 +2,42 @@
 
 <html>
   <head>
-    <title>Tubo Countdowm</title>
+    <title>Tube CountDown</title>
 	<link rel="stylesheet" href="/css/main.css" type="text/css"  />
+	<link rel="stylesheet" href="/css/style.css" type="text/css"  />
   </head>
 
+
   <body>
-	<div class="main-title">Quality Procrastination</div>
+  
+  <div id="before_header"> 
+    <div class="main_header">
+		<img src="../images/logo.png" height="25px">
+		<span class="toptext">24 hour world domination</span></a>
+	</div>
+</div>
+	
+  
+	<!--<h1>Tube Countdown</h1>
+	 colocar letras giras do workshop responsive design-->
 	<hr>
+ 
+ <div id="content">
 	
 	{% for counter in query.run(limit=10) %}
 		<div class ="counter">
 		
-		<div class="counter-title">{{counter.title}}</div>
-		<div class="counter-user">{{counter.user}}</div>
-		<div class="counter-created">{{counter.created}}</div>
-		<div class="counter-rate">{{counter.rate}}</div>	
-		<div class="counter-description">{{counter.description}}</div>
-		<div class="counter-govideo">{{counter.govideo}}</div><!--url link-->
-		
+			<div class="counter-title">{{counter.title}}</div>
+			<div class="counter-user">{{counter.user}}</div>
+			<div class="counter-created">{{counter.created}}</div>
+			<div class="counter-rate">{{counter.rate}}</div>	
+			<div class="counter-description">{{counter.description}}</div>
+			<div class="counter-govideo">{{counter.govideo}}</div><!--url link-->
+			
+			
 		</div>
 	{% endfor %}
 	
+	</div>
   </body>
 </html>

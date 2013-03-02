@@ -24,17 +24,43 @@
  
  <div id="content">
 	 <form method="post">
+			
 			<label>
-				<div>Subject</div>
-				<input type="text" name="subject" value="{{default_subject}}">
-				<div class="error">{{error_subject}}</div>
+				¨<!--SIGN in - Gooogle Authentication -->
+				<!--<div>ON AIR URL</div>-->
+				<input type="text" name="user" value="{{default_user}}">
+				<div class="error">{{error_user}}</div>
 			</label>
+	 
 			<label>
-				<div>Content</div>
-				<textarea name="content">{{default_content}}</textarea>
-				<div class="error">{{error_content}}</div>
+				<div>Title</div>
+				<input type="text" name="title" value="{{default_title}}">
+				<div class="error">{{error_title}}</div>
 			</label>
-			<input type="submit">
+			
+	 
+			<label>
+				<div>ON AIR URL</div>
+				<input type="text" name="url" value="{{default_url}}">
+				<div class="error">{{error_url}}</div>
+			</label>
+			
+			<label>
+				<div>Paypal (optional)</div>
+				<img src="../images/paypal.jpg" height="30px">
+				<!--todo-->
+				<input type="text" name="paypal" value="{{default_paypal}}">
+				<div class="error">{{error_paypal}}</div>
+			</label>
+			
+			
+			<label>
+				<div>Stream description</div>
+				<textarea name="description">{{default_description}}</textarea>
+				<div class="error">{{error_description}}</div>
+			</label>
+			
+			<input type="submit" value="Go Live!">
 		</form>	
 </div>
   </body>
