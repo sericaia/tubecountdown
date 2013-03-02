@@ -31,7 +31,6 @@ class Counter(db.Model):
     description= db.TextProperty()
     user= db.StringProperty(required=True)
     url= db.StringProperty(required=True)
-    govideo= db.LinkProperty()
     created= db.DateTimeProperty(auto_now_add=True)
     rate = int
     
@@ -43,6 +42,11 @@ class Index(BaseHandler):
     def get(self):
         query = db.GqlQuery("select * from Counter order by created desc")
         self.render("index.html", query=query)
+	
+    def post(self):
+            stage_submit = escape_html(self.request.get("stage_submit"))
+            if stage_submit:
+                self.redirect('./counter/%s' %stage_submit)
 
 
 # Stage 
@@ -55,6 +59,7 @@ class StageHandler(BaseHandler):
                     creation=creation)
     def get(self, id_):
         query = db.GqlQuery("SELECT * FROM Counter where __key__ = KEY('Counter', %d)" %int(id_))
+        print id_
         #self.render_new_post("permalink.html", query[0].subject, query[0].content, query[0].created)
         
 # sitio para o user lancar um novo video
@@ -104,7 +109,7 @@ class NewStage(BaseHandler):
 ##    created= db.DateTimeProperty(auto_now_add=True)
 ##    rate = int
             
-            self.redirect('./counter/%s' %counter.key().id())
+            self.redirect('./counter/%s' %post.key().id())
             
         else:
             default_user=""
