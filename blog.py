@@ -5,6 +5,9 @@ from string import letters
 import webapp2
 import jinja2
 
+import urlparse
+
+
 from validate import *
 
 from google.appengine.ext import db
@@ -95,6 +98,8 @@ class NewStage(BaseHandler):
         url = escape_html(self.request.get("url"))
         paypal = escape_html(self.request.get("paypal"))
         description = escape_html(self.request.get("description"))
+
+        
         
         if title and url and user:
             post = Counter( user=user, title=title, url=url, description=description, rate=0)
@@ -109,7 +114,7 @@ class NewStage(BaseHandler):
 ##    govideo= db.LinkProperty()
 ##    created= db.DateTimeProperty(auto_now_add=True)
 ##    rate = int
-            
+##              
             self.redirect('./counter/%s' %post.key().id())
             
         else:
