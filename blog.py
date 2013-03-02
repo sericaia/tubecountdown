@@ -51,16 +51,17 @@ class Index(BaseHandler):
 
 # Stage 
 class StageHandler(BaseHandler):
-    def render_new_post(self, page, subject="",
-                        content="",
-                        creation=""):
-        self.render(page, subject=subject,
-                    content=content,
-                    creation=creation)
+    def render_new_post(self, page, title="",
+                        user="",
+                        url="",
+                        description="", counter=""):
+        self.render(page,title=title,
+                    user=user,
+                    url=url,
+                    description=description, counter=counter)
     def get(self, id_):
         query = db.GqlQuery("SELECT * FROM Counter where __key__ = KEY('Counter', %d)" %int(id_))
-        print id_
-        #self.render_new_post("permalink.html", query[0].subject, query[0].content, query[0].created)
+        self.render_new_post("stage.html", query[0].title, query[0].user, query[0].url, query[0].description, query[0])
         
 # sitio para o user lancar um novo video
 class NewStage(BaseHandler):
