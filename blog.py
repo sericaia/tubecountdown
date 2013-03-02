@@ -59,6 +59,7 @@ class StageHandler(BaseHandler):
                     creation=creation)
     def get(self, id_):
         query = db.GqlQuery("SELECT * FROM Counter where __key__ = KEY('Counter', %d)" %int(id_))
+        print id_
         #self.render_new_post("permalink.html", query[0].subject, query[0].content, query[0].created)
         
 # sitio para o user lancar um novo video
