@@ -13,6 +13,8 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
 
+DEVELOPER_KEY = AIzaSyCH9KdqfFSFeB65KOccUBM4gBor2lu0_DU
+
 def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
@@ -28,7 +30,8 @@ class Counter(db.Model):
     title= db.StringProperty(required=True)
     description= db.TextProperty()
     user= db.StringProperty(required=True)
-    video= db.LinkProperty()
+    url= db.StringProperty(required=True)
+    govideo= db.LinkProperty()
     created= db.DateTimeProperty(auto_now_add=True)
     rate = int
     
@@ -56,43 +59,90 @@ class StageHandler(BaseHandler):
         
 # sitio para o user lancar um novo video
 class NewPost(BaseHandler):
-    def render_new_post(self, page, default_subject="",
-                        error_subject="",
-                        default_content="",
-                        error_content=""):
-        self.render(page, default_subject=default_subject,
-                    error_subject=error_subject,
-                    default_content=default_content,
-                    error_content=error_content)
+    def render_new_post(self, page, default_title="",
+                        error_title="",
+                        default_user="",
+                        error_user="",
+                        default_url="",
+                        error_url="",
+                        default_paypal="",
+                        error_paypal="",
+                        default_description="",
+                        error_description=""
+                        ):
+        self.render(page, default_title=default_title,
+                        error_title=error_title,
+                        default_user=default_user,
+                        error_user=error_user,
+                        default_url=default_url,
+                        error_url=error_url,
+                        default_paypal=default_paypal,
+                        error_paypal=error_paypal,
+                        default_description=default_description,
+                        error_description=error_description)
     
     def get(self):
         self.render_new_post("newpost.html")
     def post(self):
-        subject = escape_html(self.request.get("subject"))
-        content = escape_html(self.request.get("content"))
-
-        if subject and content:
-            post = Post(subject=subject, content=content)
+        title = escape_html(self.request.get("title"))
+        user = escape_html(self.request.get("user"))
+        url = escape_html(self.request.get("url"))
+        paypal = escape_html(self.request.get("paypal"))
+        description = escape_html(self.request.get("description"))
+        
+        if title and url and user:
+            post = Counter(title=title, user=user, url=url, description=description, rate=0)
             post.put()
 ##            print post.key()
 ##            print post.key().id()
-            self.redirect('./%s' %post.key().id())
+
+##title= db.StringProperty(required=True)
+##    description= db.TextProperty()
+##    user= db.StringProperty(required=True)
+##    url= db.StringProperty(required=True)
+##    govideo= db.LinkProperty()
+##    created= db.DateTimeProperty(auto_now_add=True)
+##    rate = int
+            
+            self.redirect('./counter/%s' %counter.key().id())
             
         else:
-            error_subject=""
-            error_content=""
-            default_subject=""
-            default_content=""
-            if not subject:
-                error_subject = "Subject can't be empty."
+            default_title=""
+            error_title=""
+            default_user=""
+            error_user=""
+            default_url=""
+            error_url=""
+            default_paypal=""
+            error_paypal=""
+            default_description=""
+            error_description=""                       
+           
+            if not title:
+                error_title = "Title can't be empty."
             else:
-                default_subject = escape_html(subject)
-            if not content:
-                error_content = "Content can't be empty."
+                default_title = escape_html(title)
+            if not user:
+                error_user = "User can't be empty."
             else:
-                default_content = escape_html(content)
+                default_user = escape_html(user)
+                      
+            if not url:
+                error_url = "Title can't be empty."
+            else:
+                default_url = escape_html(url)
+                        
                 
-            self.render_new_post("newpost.html", default_subject, error_subject, default_content, error_content)
+            self.render_new_post("newpost.html", default_title,
+                        error_title,
+                        default_user,
+                        error_user,
+                        default_url,
+                        error_url,
+                        default_paypal,
+                        error_paypal,
+                        default_description,
+                        error_description)
 
 app = webapp2.WSGIApplication([('/', Index),
                                ('/newcounter', NewStage),
