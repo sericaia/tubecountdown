@@ -12,11 +12,25 @@ from validate import *
 
 from google.appengine.ext import db
 
+import gdata.youtube
+import gdata.youtube.service
+
+yt_service = gdata.youtube.service.YouTubeService()
+
+# Turn on HTTPS/SSL access.
+# Note: SSL is not available at this time for uploads.
+yt_service.ssl = True
+
+DEVELOPER_KEY = "AIzaSyCH9KdqfFSFeB65KOccUBM4gBor2lu0_DU"
+yt_service.developer_key = DEVELOPER_KEY
+yt_service.client_id = '505824967076.apps.googleusercontent.com'
+
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
 
-DEVELOPER_KEY = "AIzaSyCH9KdqfFSFeB65KOccUBM4gBor2lu0_DU"
+
 
 def render_str(template, **params):
     t = jinja_env.get_template(template)
@@ -35,7 +49,7 @@ class Counter(db.Model):
     user= db.StringProperty(required=True)
     url= db.StringProperty(required=True)
     created= db.DateTimeProperty(auto_now_add=True)
-    rate = int
+    
     
     
 
@@ -105,7 +119,7 @@ class NewStage(BaseHandler):
         
         
         if title and url and user:
-            post = Counter( user=user, title=title, url=url, description=description, rate=0)
+            post = Counter( user=user, title=title, url=url, description=description)
             post.put()
 ##            print post.key()
 ##            print post.key().id()
@@ -116,7 +130,7 @@ class NewStage(BaseHandler):
 ##    url= db.StringProperty(required=True)
 ##    govideo= db.LinkProperty()
 ##    created= db.DateTimeProperty(auto_now_add=True)
-##    rate = int
+##    
 ##              
             self.redirect('./counter/%s' %post.key().id())
             
