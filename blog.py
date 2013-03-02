@@ -64,7 +64,10 @@ class StageHandler(BaseHandler):
                     description=description, counter=counter)
     def get(self, id_):
         query = db.GqlQuery("SELECT * FROM Counter where __key__ = KEY('Counter', %d)" %int(id_))
-        self.render_new_post("stage.html", query[0].title, query[0].user, query[0].url, query[0].description, query[0])
+        url_data = urlparse.urlparse(query[0].url)
+        query_src = urlparse.parse_qs(url_data.query)
+        video = query_src["v"][0]
+        self.render_new_post("stage.html", query[0].title, query[0].user, video, query[0].description, query[0])
         
 # sitio para o user lancar um novo video
 class NewStage(BaseHandler):
