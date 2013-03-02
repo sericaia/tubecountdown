@@ -13,7 +13,7 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
 
-DEVELOPER_KEY = AIzaSyCH9KdqfFSFeB65KOccUBM4gBor2lu0_DU
+DEVELOPER_KEY = "AIzaSyCH9KdqfFSFeB65KOccUBM4gBor2lu0_DU"
 
 def render_str(template, **params):
     t = jinja_env.get_template(template)
@@ -58,7 +58,7 @@ class StageHandler(BaseHandler):
         self.render_new_post("permalink.html", query[0].subject, query[0].content, query[0].created)
         
 # sitio para o user lancar um novo video
-class NewPost(BaseHandler):
+class NewStage(BaseHandler):
     def render_new_post(self, page, default_title="",
                         error_title="",
                         default_user="",
@@ -145,6 +145,6 @@ class NewPost(BaseHandler):
                         error_description)
 
 app = webapp2.WSGIApplication([('/', Index),
-                               ('/newcounter', NewStage),
+                               ('/newpost', NewStage),
                                (r'/counter/(\d+)',StageHandler)],
                               debug=True)
