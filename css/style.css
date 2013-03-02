@@ -26,6 +26,10 @@ margin-bottom:5px
 color: #aa0f09;
 }
 
+.newstage{
+	background: url(../images/button_newstage.png) no-repeat;
+}
+
 /*garantir o racio da imagem (nao ha distorções em termos de altura)*/
 /*img{
 max-width:100%;
