@@ -32,6 +32,18 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 
 
 
+def GetAuthSubUrl():
+    next = 'http://www.tubecountdown.appspot.com/newpost'
+    scope = 'http://gdata.youtube.com'
+    secure = False
+    session = True
+    yt_service = gdata.youtube.service.YouTubeService()
+    return yt_service.GenerateAuthSubURL(next, scope, secure, session)
+
+
+
+
+
 def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
@@ -85,7 +97,7 @@ class StageHandler(BaseHandler):
         
 # sitio para o user lancar um novo video
 class NewStage(BaseHandler):
-    def render_new_post(self, page, default_user="",
+    def render_new_post(self, page, authSubUrl="", default_user="",
                         error_user="",
                         default_title="",
                         error_title="",
@@ -96,7 +108,8 @@ class NewStage(BaseHandler):
                         default_description="",
                         error_description=""):
         
-        self.render(page, default_user=default_user,
+        self.render(page,
+                    authSubUrl=authSubUrl, default_user=default_user,
                     error_user=error_user,
                     default_title=default_title,
                     error_title=error_title,
@@ -108,7 +121,12 @@ class NewStage(BaseHandler):
                     error_description=error_description)
     
     def get(self):
-        self.render_new_post("newpost.html")
+        authSubUrl = GetAuthSubUrl()
+
+        
+        self.render_new_post("newpost.html", authSubUrl)
+
+
     def post(self):
         title = escape_html(self.request.get("title"))
         user = escape_html(self.request.get("user"))
