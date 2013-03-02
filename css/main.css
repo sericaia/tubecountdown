@@ -8,16 +8,6 @@ body {
     color: #333;
 }
 
-#before_header {
-float: left;
-width: 100%;
-background: white;
-margin: 0 0 0 0px;
-}
-
-#content{width: 800px;  
-width: 900px; 
-  margin: 0 auto; }
 
 .login-area {
     font-size: 13px;
@@ -136,4 +126,3 @@ pre {
     color: gray;
     font-size: 12px;
 }
-
