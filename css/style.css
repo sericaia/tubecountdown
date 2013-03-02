@@ -3,6 +3,7 @@ float: left;
 width: 100%;
 background: url(../images/main_header.jpg) 0 0 repeat-x;
 padding: 15px 5px 5px 100px;
+margin-bottom:30px;
 }
 
 .toptext{
