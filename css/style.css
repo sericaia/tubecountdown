@@ -2,27 +2,27 @@
 float: left;
 width: 100%;
 background: url(../images/main_header.jpg) 0 0 repeat-x;
-padding: 5px 5px 5px 5px;
-
+padding: 15px 5px 5px 100px;
 }
 
 .toptext{
 font-size: 20px;
 font-weight: bold;
+margin-left:40px;
+margin-bottom:5px
 }
 
-.input-text, .input-text-url{
+.input-text, .input-text-red{
 	font-size: 120%;
 	margin: 0px 10px 0 5px;
 	color: #565656;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-variant: normal;
-	text-transform: uppercase;
+	font-variant: normal;	
 	background: transparent;
 	font-weight: bold;
 	text-shadow: 0px 1px -1px #c2c2c2;
 }
-.input-text-url{
+.input-text-red, .toptext{
 color: #aa0f09;
 
 }
