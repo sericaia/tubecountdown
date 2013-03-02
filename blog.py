@@ -24,20 +24,26 @@ class BaseHandler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
-class Post(db.Model):
-    subject= db.StringProperty(required=True)
-    content= db.TextProperty()
+class Counter(db.Model):
+    title= db.StringProperty(required=True)
+    description= db.TextProperty()
+    user= db.StringProperty(required=True)
+    video= db.LinkProperty()
     created= db.DateTimeProperty(auto_now_add=True)
+    rate = int
+    
     
 
-
+# pagina inicial com lista de cenas hot
 class Index(BaseHandler):
 
     def get(self):
-        query = db.GqlQuery("select * from Post order by created desc")
+        query = db.GqlQuery("select * from Counter order by created desc")
         self.render("index.html", query=query)
 
-class PostHandler(BaseHandler):
+
+# Stage 
+class StageHandler(BaseHandler):
     def render_new_post(self, page, subject="",
                         content="",
                         creation=""):
@@ -45,10 +51,10 @@ class PostHandler(BaseHandler):
                     content=content,
                     creation=creation)
     def get(self, id_):
-        query = db.GqlQuery("SELECT * FROM Post where __key__ = KEY('Post', %d)" %int(id_))
+        query = db.GqlQuery("SELECT * FROM Counter where __key__ = KEY('Counter', %d)" %int(id_))
         self.render_new_post("permalink.html", query[0].subject, query[0].content, query[0].created)
         
-
+# sitio para o user lancar um novo video
 class NewPost(BaseHandler):
     def render_new_post(self, page, default_subject="",
                         error_subject="",
@@ -88,7 +94,7 @@ class NewPost(BaseHandler):
                 
             self.render_new_post("newpost.html", default_subject, error_subject, default_content, error_content)
 
-app = webapp2.WSGIApplication([('/blog', Index),
-                               ('/blog/newpost', NewPost),
-                               (r'/blog/(\d+)',PostHandler)],
+app = webapp2.WSGIApplication([('/', Index),
+                               ('/newcounter', NewStage),
+                               (r'/counter/(\d+)',StageHandler)],
                               debug=True)
