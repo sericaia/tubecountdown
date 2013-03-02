@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Quality Procrastination</title>
+	<link rel="stylesheet" href="/css/main.css" type="text/css"  />
+  </head>
+
+  <body>
+	<div class="main-title">Quality Procrastination</div>
+	<hr>
+	
+	{% for post in query.run(limit=10) %}
+		<div class ="post">
+		
+		<div class="post-title">{{post.subject}}</div>
+		
+			<pre class="post-content">
+	{{post.content}}
+			</pre>
+			
+			<div class="post-date" align="right">{{post.created}}</div>
+		</div>
+	{% endfor %}
+	
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Quality Procrastination - New Post</title>
+	<link rel="stylesheet" href="/css/main.css" type="text/css"  />
+  </head>
+
+  <body>
+	<h1>New Entry</h1>
+	<hr>
+    <form method="post">
+		<label>
+			<div>Subject</div>
+			<input type="text" name="subject" value="{{default_subject}}">
+			<div class="error">{{error_subject}}</div>
+		</label>
+		<label>
+			<div>Content</div>
+			<textarea name="content">{{default_content}}</textarea>
+			<div class="error">{{error_content}}</div>
+		</label>
+		<input type="submit">
+	</form>
+  </body>
+</html>
