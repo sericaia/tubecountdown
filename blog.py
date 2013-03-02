@@ -5,6 +5,9 @@ from string import letters
 import webapp2
 import jinja2
 
+import urlparse
+
+
 from validate import *
 
 from google.appengine.ext import db
@@ -61,7 +64,10 @@ class StageHandler(BaseHandler):
                     description=description, counter=counter)
     def get(self, id_):
         query = db.GqlQuery("SELECT * FROM Counter where __key__ = KEY('Counter', %d)" %int(id_))
-        self.render_new_post("stage.html", query[0].title, query[0].user, query[0].url, query[0].description, query[0])
+        url_data = urlparse.urlparse(query[0].url)
+        query_src = urlparse.parse_qs(url_data.query)
+        video = query_src["v"][0]
+        self.render_new_post("stage.html", query[0].title, query[0].user, video, query[0].description, query[0])
         
 # sitio para o user lancar um novo video
 class NewStage(BaseHandler):
@@ -95,6 +101,8 @@ class NewStage(BaseHandler):
         url = escape_html(self.request.get("url"))
         paypal = escape_html(self.request.get("paypal"))
         description = escape_html(self.request.get("description"))
+
+        
         
         if title and url and user:
             post = Counter( user=user, title=title, url=url, description=description, rate=0)
@@ -109,7 +117,7 @@ class NewStage(BaseHandler):
 ##    govideo= db.LinkProperty()
 ##    created= db.DateTimeProperty(auto_now_add=True)
 ##    rate = int
-            
+##              
             self.redirect('./counter/%s' %post.key().id())
             
         else:
