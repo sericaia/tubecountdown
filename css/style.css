@@ -14,15 +14,15 @@ font-weight: bold;
 .input-text, .input-text-url{
 	font-size: 120%;
 	margin: 0px 10px 0 5px;
-	color: #FFFFFF;
+	color: #565656;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-variant: normal;
 	text-transform: uppercase;
 	background: transparent;
 	font-weight: bold;
-	text-shadow: 0px 1px -1px #FFFFFF;
+	text-shadow: 0px 1px -1px #565656;
 }
 .input-text-url{
-color: 
+color: #aa0f09;
 
 }
