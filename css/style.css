@@ -13,7 +13,7 @@ margin-bottom:5px
 }
 
 .input-text, .input-text-red{
-	font-size: 80%;
+	
 	margin: 0px 10px 0 5px;
 	color: #565656;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -38,6 +38,17 @@ height:auto!important
 }*/
 
 
+#before_header {
+float: left;
+width: 100%;
+background: white;
+margin: 0 0 0 0px;
+}
+
+#content{width: 800px;  
+width: 900px; 
+  margin: 0 auto; }
+  
 iframe{
 padding-top:  15px;
 padding-bottom: 15px;
@@ -57,4 +68,12 @@ th{padding:10px}
 	 font-size: 140%;
 	 color:#acacac;
 	 text-shadow: 0px 1px -1px #727272;
+}
+
+.leftcol{
+	width:55%
+}
+.rightcol{
+	float:right;
+	width:40%
 }
