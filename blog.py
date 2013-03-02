@@ -55,31 +55,31 @@ class StageHandler(BaseHandler):
                     creation=creation)
     def get(self, id_):
         query = db.GqlQuery("SELECT * FROM Counter where __key__ = KEY('Counter', %d)" %int(id_))
-        self.render_new_post("permalink.html", query[0].subject, query[0].content, query[0].created)
+        #self.render_new_post("permalink.html", query[0].subject, query[0].content, query[0].created)
         
 # sitio para o user lancar um novo video
 class NewStage(BaseHandler):
-    def render_new_post(self, page, default_title="",
-                        error_title="",
-                        default_user="",
+    def render_new_post(self, page, default_user="",
                         error_user="",
+                        default_title="",
+                        error_title="",
                         default_url="",
                         error_url="",
                         default_paypal="",
                         error_paypal="",
                         default_description="",
-                        error_description=""
-                        ):
-        self.render(page, default_title=default_title,
-                        error_title=error_title,
-                        default_user=default_user,
-                        error_user=error_user,
-                        default_url=default_url,
-                        error_url=error_url,
-                        default_paypal=default_paypal,
-                        error_paypal=error_paypal,
-                        default_description=default_description,
-                        error_description=error_description)
+                        error_description=""):
+        
+        self.render(page, default_user=default_user,
+                    error_user=error_user,
+                    default_title=default_title,
+                    error_title=error_title,
+                    default_url=default_url,
+                    error_url=error_url,
+                    default_paypal=default_paypal,
+                    error_paypal=error_paypal,
+                    default_description=default_description,
+                    error_description=error_description)
     
     def get(self):
         self.render_new_post("newpost.html")
@@ -91,7 +91,7 @@ class NewStage(BaseHandler):
         description = escape_html(self.request.get("description"))
         
         if title and url and user:
-            post = Counter(title=title, user=user, url=url, description=description, rate=0)
+            post = Counter( user=user, title=title, url=url, description=description, rate=0)
             post.put()
 ##            print post.key()
 ##            print post.key().id()
@@ -107,10 +107,10 @@ class NewStage(BaseHandler):
             self.redirect('./counter/%s' %counter.key().id())
             
         else:
-            default_title=""
-            error_title=""
             default_user=""
             error_user=""
+            default_title=""
+            error_title=""
             default_url=""
             error_url=""
             default_paypal=""
@@ -133,16 +133,16 @@ class NewStage(BaseHandler):
                 default_url = escape_html(url)
                         
                 
-            self.render_new_post("newpost.html", default_title,
-                        error_title,
-                        default_user,
-                        error_user,
-                        default_url,
-                        error_url,
-                        default_paypal,
-                        error_paypal,
-                        default_description,
-                        error_description)
+            self.render_new_post("newpost.html", default_user,
+                                 error_user,
+                                 default_title,
+                                 error_title,
+                                 default_url,
+                                 error_url,
+                                 default_paypal,
+                                 error_paypal,
+                                 default_description,
+                                 error_description)
 
 app = webapp2.WSGIApplication([('/', Index),
                                ('/newpost', NewStage),
