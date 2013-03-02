@@ -1,0 +1,12 @@
+.main_header {
+float: left;
+width: 100%;
+background: url(../images/main_header.jpg) 0 0 repeat-x;
+padding: 5px;
+
+}
+
+.toptext{
+font-size: 20px;
+font-weight: bold;
+}

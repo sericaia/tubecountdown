@@ -12,6 +12,10 @@ handlers:
 - url: /css
   static_dir: css
   
+  
+- url: /images
+  static_dir: images
+  
 
 - url: /.*
   script: blog.app

@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Quality Procrastination</title>
+    <title>Tubo Countdowm</title>
 	<link rel="stylesheet" href="/css/main.css" type="text/css"  />
   </head>
 
@@ -10,16 +10,16 @@
 	<div class="main-title">Quality Procrastination</div>
 	<hr>
 	
-	{% for post in query.run(limit=10) %}
-		<div class ="post">
+	{% for counter in query.run(limit=10) %}
+		<div class ="counter">
 		
-		<div class="post-title">{{post.subject}}</div>
+		<div class="counter-title">{{counter.title}}</div>
+		<div class="counter-user">{{counter.user}}</div>
+		<div class="counter-created">{{counter.created}}</div>
+		<div class="counter-rate">{{counter.rate}}</div>	
+		<div class="counter-description">{{counter.description}}</div>
+		<div class="counter-govideo">{{counter.govideo}}</div><!--url link-->
 		
-			<pre class="post-content">
-	{{post.content}}
-			</pre>
-			
-			<div class="post-date" align="right">{{post.created}}</div>
 		</div>
 	{% endfor %}
 	

@@ -2,25 +2,40 @@
 
 <html>
   <head>
-    <title>Quality Procrastination - New Post</title>
+    <title>Tube CountDown</title>
 	<link rel="stylesheet" href="/css/main.css" type="text/css"  />
+	<link rel="stylesheet" href="/css/style.css" type="text/css"  />
   </head>
 
+
   <body>
-	<h1>New Entry</h1>
+  
+  <div id="before_header"> 
+    <div class="main_header">
+		<img src="../images/logo.png" height="25px">
+		<span class="toptext">24 hour world domination</span></a>
+	</div>
+</div>
+	
+  
+	<!--<h1>Tube Countdown</h1>
+	 colocar letras giras do workshop responsive design-->
 	<hr>
-    <form method="post">
-		<label>
-			<div>Subject</div>
-			<input type="text" name="subject" value="{{default_subject}}">
-			<div class="error">{{error_subject}}</div>
-		</label>
-		<label>
-			<div>Content</div>
-			<textarea name="content">{{default_content}}</textarea>
-			<div class="error">{{error_content}}</div>
-		</label>
-		<input type="submit">
-	</form>
+ 
+ <div id="content">
+	 <form method="post">
+			<label>
+				<div>Subject</div>
+				<input type="text" name="subject" value="{{default_subject}}">
+				<div class="error">{{error_subject}}</div>
+			</label>
+			<label>
+				<div>Content</div>
+				<textarea name="content">{{default_content}}</textarea>
+				<div class="error">{{error_content}}</div>
+			</label>
+			<input type="submit">
+		</form>	
+</div>
   </body>
 </html>
