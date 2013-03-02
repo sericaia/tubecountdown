@@ -10,42 +10,51 @@
 
   <body>
   		<div class="main_header">
-			<a href="index"><img src="../images/logo.png" height="25px"></a>
+			<a href="/"><img src="../images/logo.png" height="25px"></a>
 			<span class="toptext">24 hour world domination</span></a>
+			
 		</div>
 	  
 	<!--<h1>Tube Countdown</h1>
 	 colocar letras giras do workshop responsive design-->
  
  <div id="content">
-	
-	  <a href="newpost" class="newstage">newstage</a>
-	
-	<h1>current stages</h1>
-	
-	<table border="0">
+	<a href="newpost" class="newstage"><img src="../images/button_newstage.png"></a>
+	<h1>current stages</h1> 
+	<hr>
+	<table border="0" border-style="outset">
+	<tr class="table-text-titles">
+		<th>Title</th>
+		<th>User</th>
+		<th>Timeout</th>
+		<th>Rate</th>
+		<th>Description</th>
+		<th>Google+</th>
+		<th>Link</th>
+	</tr>
 
 	{% for counter in query.run(limit=10) %}
-		
-
+		<tr>
 		<div class ="counter">
 		<form method="post">
-			<th><div class="counter-title">{{counter.title}}</div></th>			
+			<th><div class="counter-title">{{counter.title}}</div></th>
+					
 			<th><div class="counter-user">{{counter.user}}</div></th>	
-			<th><div class="counter-created">{{counter.created}}</div></th>	
+			<th><div class="counter-created">{{counter.created.hour}}h{{counter.created.minute}}m{{counter.created.second}}s</div></th>	
+					
 			<th><div class="counter-rate">{{counter.rate}}</div></th>	
 			<th><div class="counter-description">{{counter.description}}</div></th>	
 			<!-- Place this tag where you want the +1 button to render. -->
-			<th><div class="g-plusone" data-annotation="inline" data-width="300" data-href="{{counter.url}}"></div></th>	
+			<th><div class="g-plusone" data-href="{{counter.url}}"></div></th>	
 
 			<!-- botao GO_URL-->
-
-			<input type="hidden" name="stage_submit"  value="{{counter.key().id()}}">
-			<input type="submit"  value="Watch">
+			<th><input type="hidden" name="stage_submit"  value="{{counter.key().id()}}">
+			<input type="submit"  value="Watch"></th>
 		</form>	
 		</div>
 		
 		</tr>
+	
 	{% endfor %}
 	</table>
 	

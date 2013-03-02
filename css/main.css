@@ -69,7 +69,7 @@ input[type=text] {
 
 textarea {
   width: 500px;
-  height: 400px;
+  height: 200px;
   font-size: 17px;
   font-family: monospace;
 }
